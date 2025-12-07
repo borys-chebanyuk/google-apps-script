@@ -1,134 +1,135 @@
-<h1>Upwork Jobs Importer — Google Apps Script</h1>
+  <h1>Upwork Jobs Importer — Google Apps Script</h1>
 
-This project contains Google Apps Script utilities that automate importing job details from Upwork into a Google Spreadsheet.
-The script reads job URLs from the sheet, extracts the job key, queries the Upwork API, and writes structured job data into row fields.
-A second script refreshes the Upwork OAuth access token on a daily schedule using a refresh token.
+  <p>
+    This project contains Google Apps Script utilities that automate importing job details from <strong>Upwork</strong> into a <strong>Google Spreadsheet</strong>.
+    The script reads job URLs from the sheet, extracts the job key, queries the Upwork API, and writes structured job data into row fields.
+    A second script refreshes the Upwork OAuth access token on a daily schedule using a refresh token.
+  </p>
 
-Features
-1. getjobs() — Main Upwork Job Importer
+  <h2>Features</h2>
 
-Reads Upwork job URLs from column E.
+  <h3>1. <code>getjobs()</code> — Main Upwork Job Importer</h3>
+  <ul>
+    <li>Reads Upwork job URLs from <strong>column E</strong>.</li>
+    <li>Extracts the job key from URLs (the part after <code>/jobs/</code>).</li>
+    <li>Sends an authorized GET request to the Upwork Jobs API:
+      <pre><code>https://www.upwork.com/api/profiles/v1/jobs/{job_key}.json</code></pre>
+    </li>
+    <li>Writes job data into specific spreadsheet columns:
+      <ul>
+        <li>job title</li>
+        <li>description</li>
+        <li>client country</li>
+        <li>total client spend</li>
+        <li>number of hires</li>
+        <li>creation date / time</li>
+        <li>calculated average check</li>
+      </ul>
+    </li>
+    <li>Applies conditional formatting: business days highlighted <strong>green</strong>, weekends <strong>red</strong>.</li>
+  </ul>
 
-Extracts the job key from URLs (the part after /jobs/).
+  <h3>2. <code>requestAccessToken()</code> — OAuth Token Refresher</h3>
+  <ul>
+    <li>Uses <code>refresh_token</code> to obtain a new <code>access_token</code> and <code>refresh_token</code>.</li>
+    <li>Updates the <code>admin</code> sheet automatically.</li>
+    <li>Intended to run daily via a Google Apps Script trigger.</li>
+    <li>Token endpoint:
+      <pre><code>https://www.upwork.com/api/v3/oauth2/token</code></pre>
+    </li>
+  </ul>
 
-Sends an authorized GET request to the Upwork API:
+  <h2>Requirements</h2>
+  <ul>
+    <li>Upwork account with a registered OAuth application.</li>
+    <li><strong>Client ID</strong>, <strong>Client Secret</strong>, and a valid <strong>refresh_token</strong>.</li>
+    <li>Google Spreadsheet with:
+      <ul>
+        <li>a sheet for job URLs (the script uses the active sheet)</li>
+        <li>a sheet named <code>admin</code> with the following cells:</li>
+      </ul>
+    </li>
+  </ul>
 
-https://www.upwork.com/api/profiles/v1/jobs/{job_key}.json
+  <table aria-label="admin cells">
+    <thead>
+      <tr><th>Cell</th><th>Meaning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>admin!A1</code></td><td>access_token</td></tr>
+      <tr><td><code>admin!A2</code></td><td>refresh_token</td></tr>
+    </tbody>
+  </table>
 
-
-Writes job data into specific spreadsheet columns:
-
-job title
-
-description
-
-client country
-
-total client spend
-
-number of hires
-
-creation date / time
-
-calculated average check
-
-Applies conditional formatting:
-
-business days highlighted green, weekends red.
-
-2. requestAccessToken() — OAuth Token Refresher
-
-Uses refresh_token to obtain a new access_token and refresh_token.
-
-Updates the admin sheet automatically.
-
-Intended to run daily via a Google Apps Script trigger.
-
-Uses:
-
-https://www.upwork.com/api/v3/oauth2/token
-
-Requirements
-
-Upwork account with a registered OAuth application
-
-Client ID, Client Secret, and valid refresh_token
-
-Google Spreadsheet with:
-
-A sheet for job URLs (the script uses the active sheet)
-
-A sheet named admin:
-
-Cell	Meaning
-admin!A1	access_token
-admin!A2	refresh_token
-
-Update the following fields inside the script:
-
-let clientId = 'CLIENT_ID';
+  <p class="muted">Update these fields inside <code>requestAccessToken()</code> before running:</p>
+  <pre><code>let clientId = 'CLIENT_ID';
 let clientSecret = 'CLIENT_SECRET';
-let redirectUri = 'https://script.google.com/macros/d/YOUR_ID/usercallback';
+let redirectUri = 'https://script.google.com/macros/d/YOUR_ID/usercallback';</code></pre>
 
-Spreadsheet Column Structure
+  <h2>Spreadsheet Column Structure</h2>
+  <p>Below is the exact layout used by the script:</p>
 
-Below is the exact layout used by the script:
+  <table aria-label="column structure">
+    <thead>
+      <tr><th>Column</th><th>Index</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>1</td><td>Script counter (i)</td></tr>
+      <tr><td>E</td><td>5</td><td>User input — Upwork job URL</td></tr>
+      <tr><td>Y</td><td>25</td><td>Temporary: extracted job key</td></tr>
+      <tr><td>F</td><td>6</td><td>Job Title</td></tr>
+      <tr><td>G</td><td>7</td><td>Job Description</td></tr>
+      <tr><td>R</td><td>18</td><td>Client Country</td></tr>
+      <tr><td>S</td><td>19</td><td>Total Client Spend</td></tr>
+      <tr><td>T</td><td>20</td><td>Total Hires</td></tr>
+      <tr><td>U</td><td>21</td><td>Average Check (Spend / Hires)</td></tr>
+      <tr><td>Z</td><td>26</td><td>Job creation date</td></tr>
+      <tr><td>AA</td><td>27</td><td>Job creation time</td></tr>
+      <tr><td>AB</td><td>28</td><td>Day of week (<code>=TEXT(Zi, "dddd")</code>)</td></tr>
+      <tr><td>AD</td><td>30</td><td>Time fragment from Upwork timestamp</td></tr>
+    </tbody>
+  </table>
 
-Column	Index	Purpose
-A	1	Script counter (i)
-E	5	User input — Upwork job URL
-Y	25	Temporary: extracted job key
-F	6	Job Title
-G	7	Job Description
-R	18	Client Country
-S	19	Total Client Spend
-T	20	Total Hires
-U	21	Average Check (Spend / Hires)
-Z	26	Job creation date
-AA	27	Job creation time
-AB	28	Day of week (=TEXT(Zi, "dddd"))
-AD	30	Time fragment from Upwork timestamp
-How to Install
-1. Prepare the Google Sheet
+  <h2>How to Install</h2>
 
-Create at least two sheets:
+  <h3>1. Prepare the Google Sheet</h3>
+  <ol>
+    <li>Create at least two sheets:
+      <ul>
+        <li><strong>Main sheet</strong> — where links are entered</li>
+        <li><strong>admin</strong> — for storing tokens</li>
+      </ul>
+    </li>
+    <li>Fill token cells:
+      <pre><code>admin!A1 — access_token
+admin!A2 — refresh_token</code></pre>
+    </li>
+  </ol>
 
-Main sheet — where links are entered
+  <h3>2. Add the Script</h3>
+  <ol>
+    <li>Open Google Sheets → <strong>Extensions → Apps Script</strong>.</li>
+    <li>Paste both functions (<code>getjobs</code> and <code>requestAccessToken</code>).</li>
+    <li>Insert your Upwork credentials (Client ID / Secret / redirectUri).</li>
+    <li>Save the project.</li>
+  </ol>
 
-admin — for storing tokens
+  <h3>3. Grant Permissions</h3>
+  <p>On the first run Google will request:</p>
+  <ul>
+    <li>Spreadsheet read/write access</li>
+    <li>External API access (<code>UrlFetchApp</code>)</li>
+  </ul>
+  <p><strong>Approve</strong> the requested permissions to allow the script to work.</p>
 
-Fill token cells:
+  <h3>4. Set Up Triggers</h3>
+  <p>Go to: <em>Extensions → Apps Script → Triggers</em></p>
+  <ul>
+    <li>Create a <strong>daily trigger</strong> → run <code>requestAccessToken()</code>.</li>
+    <li>Optional: create a manual or scheduled trigger to run <code>getjobs()</code>, or run it manually when needed.</li>
+  </ul>
 
-admin!A1 — access_token  
-admin!A2 — refresh_token
-
-2. Add the Script
-
-Open Google Sheets → Extensions → Apps Script
-
-Paste both functions (getjobs and requestAccessToken)
-
-Insert your Upwork credentials
-
-Save
-
-3. Grant Permissions
-
-On the first run Google will request:
-
-Spreadsheet read/write access
-
-External API access (UrlFetchApp)
-
-Approve.
-
-4. Set Up Triggers
-
-Go to:
-Extensions → Apps Script → Triggers
-
-Create:
-
-Daily trigger → run requestAccessToken()
-
-Optional: manual or scheduled trigger → run getjobs()
+  <p class="note">
+    <strong>Security note:</strong> Do not commit Client ID / Client Secret / access tokens to a public repository.
+    Consider using Script Properties or a secure secret management approach if you plan to publish your project.
+  </p>
