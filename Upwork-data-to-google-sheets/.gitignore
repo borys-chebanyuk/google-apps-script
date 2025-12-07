@@ -1,0 +1,38 @@
+# Node modules (if using clasp with build tools)
+node_modules/
+
+# Dependencies installed via npm
+npm-debug.log
+yarn-debug.log*
+yarn-error.log*
+
+# Build and transpiled output (if using webpack/esbuild)
+dist/
+build/
+
+# Google Apps Script clasp credentials
+.clasp.json
+.clasp.json.backup
+
+# Optional local settings
+.env
+.env.*
+*.local
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+logs/
+
+# IDE folders and settings
+.vscode/
+.idea/
+
+# Google Drive temporary sync files
+~$*
