@@ -133,3 +133,15 @@ admin!A2 — refresh_token</code></pre>
     <strong>Security note:</strong> Do not commit Client ID / Client Secret / access tokens to a public repository.
     Consider using Script Properties or a secure secret management approach if you plan to publish your project.
   </p>
+
+<h3>🎥 Screencast Demo</h3>
+
+<p>
+  <a href="https://monosnap.ai/file/NcNvih8dz8tqMrUCHNhx3cg2GHnJpf" target="_blank">
+    <img src="assets/screencast-preview.jpg" alt="Upwork Jobs Importer Screencast" width="800">
+  </a>
+</p>
+
+<p>
+  👉 Click the screenshot to watch the full screencast on Monosnap.
+</p>
