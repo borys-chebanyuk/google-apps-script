@@ -10,7 +10,7 @@ This is useful for business directories, job aggregators, and similar catalog se
 
 <h2>What the Script Does</h2>
 <ul>
-  <li>Takes URL(s) from cells on the <strong>Atlanta</strong> sheet in the active spreadsheet.</li>
+  <li>Takes URL(s) from cells on the sheet in the active spreadsheet.</li>
   <li>Sends HTTP requests to the catalog pages (the first page and a series of subsequent pages).</li>
   <li>Searches for HTML blocks with the <code>provider_card</code> class (supplier cards).</li>
   <li>For each card, extracts: company name, location, size, list of services, and profile link.</li>
@@ -51,4 +51,5 @@ This is useful for business directories, job aggregators, and similar catalog se
 <p>
   👉 Click the screenshot to watch the full screencast.
 </p>
+
 
