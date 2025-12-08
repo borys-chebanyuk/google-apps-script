@@ -37,16 +37,16 @@
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
-    <th>A</th>
-    <th>B</th>
-    <th>C</th>
+    <th>A (Date)</th>
+    <th>B (From)</th>
+    <th>C (Email Adress)</th>
     <th>D (Incoming Email)</th>
     <th>E (AI Reply)</th>
   </tr>
   <tr>
-    <td>optional</td>
-    <td></td>
-    <td></td>
+    <td>08/12/2025</td>
+    <td>Somebody</td>
+    <td>email@gmail.com</td>
     <td>email text</td>
     <td>generated reply</td>
   </tr>
@@ -71,3 +71,4 @@
   <li>Avoid sending sensitive data to external APIs unless necessary.</li>
   <li>You may modify the model, temperature, or <code>max_tokens</code> depending on your needs and API limits.</li>
 </ul>
+
