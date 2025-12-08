@@ -74,6 +74,7 @@
   <li>Navigate to: <strong>Extensions → Apps Script</strong></li>
   <li>Delete any default code.</li>
   <li>Paste the script into the editor.</li>
+  <li>Connect the OAuth2 library to Apps Script “1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF”.</li>
 </ul>
 
 <h3>3️⃣ Insert Your Shopify Access Token</h3>
