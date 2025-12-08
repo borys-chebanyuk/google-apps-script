@@ -110,6 +110,7 @@ admin!A2 — refresh_token</code></pre>
   <ol>
     <li>Open Google Sheets → <strong>Extensions → Apps Script</strong>.</li>
     <li>Paste both functions (<code>getjobs</code> and <code>requestAccessToken</code>).</li>
+    <li>Connect the OAuth2 library to Apps Script “1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF”</li>
     <li>Insert your Upwork credentials (Client ID / Secret / redirectUri).</li>
     <li>Save the project.</li>
   </ol>
