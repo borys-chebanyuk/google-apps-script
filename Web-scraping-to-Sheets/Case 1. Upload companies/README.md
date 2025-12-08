@@ -40,4 +40,15 @@ This is useful for business directories, job aggregators, and similar catalog se
 
 <p>The script will start fetching data and filling the spreadsheet.</p>
 
-<video src="media/demo.mp4" controls width="800"></video>
+<h3>🎥 Screencast Demo</h3>
+
+<p>
+  <a href="https://drive.google.com/file/d/1p2qTuqzZOJHQ6avDAX-kZGOtLmNWyrVo/view?usp=sharing" target="_blank">
+    <img src="assets/screencast-preview.jpg" alt="Upwork Jobs Importer Screencast" width="800">
+  </a>
+</p>
+
+<p>
+  👉 Click the screenshot to watch the full screencast.
+</p>
+
