@@ -143,5 +143,5 @@ admin!A2 — refresh_token</code></pre>
 </p>
 
 <p>
-  👉 Click the screenshot to watch the full screencast on Monosnap.
+  👉 Click the screenshot to watch the full screencast.
 </p>
