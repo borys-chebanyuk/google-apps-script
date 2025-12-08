@@ -39,3 +39,5 @@ This is useful for business directories, job aggregators, and similar catalog se
 </ol>
 
 <p>The script will start fetching data and filling the spreadsheet.</p>
+
+<video src="media/demo.mp4" controls width="800"></video>
